@@ -16,8 +16,8 @@ app.set("view engine", "ejs");
 
 const PORT = 3000;
 
-app.get("/", indexRouter);
-app.get("/new", newMsgRouter);
+app.use("/", indexRouter);
+app.use("/new", newMsgRouter);
 
 app.listen(PORT, () => {
   console.log(`App listening on port ${PORT}`);
