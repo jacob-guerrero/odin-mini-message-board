@@ -10,10 +10,15 @@
     <h1>Welcome!</h1>
     <h2><%= title %></h2>
 
-    <% messages.forEach((message) => { %>
     <ul>
-      <li><%= `${message.user}: ${message.text} (${message.added})` %></li>
+      <% messages.forEach((message, index) => { %>
+      <li>
+        <%= `${message.user}: ${message.text} (${message.added})` %>
+        <button onclick="window.location.href = '<%= index %>'">Open</button>
+      </li>
+      <% }); %>
     </ul>
-    <% }); %>
+
+    <button onclick="window.location.href = '/new'">New Message</button>
   </body>
 </html>
