@@ -1,11 +1,17 @@
 const { Router } = require("express");
 
 const indexRouter = Router();
-const { messages } = require("../dbLocal");
-const { getMessageById } = require("../controllers/infoController");
+/* const { messages } = require("../dbLocal"); */
+const {
+  getMessageById,
+  getAllMessages,
+} = require("../controllers/infoController");
 
-indexRouter.get("/", (req, res) =>
-  res.render("index", { title: "Mini Messageboard", messages: messages })
+indexRouter.get(
+  "/",
+  getAllMessages
+  /* (req, res) =>
+  res.render("index", { title: "Mini Messageboard", messages: messages }) */
 );
 
 indexRouter.get(

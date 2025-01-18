@@ -28,4 +28,10 @@ async function getMessageById(req, res) {
   res.render("info", { id: req.params.id, message: message });
 }
 
-module.exports = { getMessageById };
+async function getAllMessages(req, res) {
+  const messages = await db.getAllMessages();
+
+  res.render("index", { title: "Mini Messageboard", messages: messages });
+}
+
+module.exports = { getMessageById, getAllMessages };
