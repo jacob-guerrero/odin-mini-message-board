@@ -2,7 +2,9 @@ const { Client } = require("pg");
 require("dotenv").config();
 
 const connectionString =
-  process.env.connectionString || process.env.RAILWAY_DATABASE_URL;
+  process.env.NODE_ENV === "production"
+    ? process.env.connectionString
+    : process.env.RAILWAY_DATABASE_URL;
 
 // Create the messages table
 const createTableQuery = `

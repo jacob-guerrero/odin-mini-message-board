@@ -25,7 +25,7 @@ async function getMessageById(id) {
   const values = [id];
 
   const { rows } = await pool.query(query, values);
-  return rows;
+  return rows[0];
 }
 
 async function deleteMessage(id) {

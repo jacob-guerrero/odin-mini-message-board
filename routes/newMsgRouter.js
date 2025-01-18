@@ -1,7 +1,7 @@
 const { Router } = require("express");
 
 const newMsgRouter = Router();
-const { messages } = require("../db");
+const { messages } = require("../dbLocal");
 
 newMsgRouter.get("/", (req, res) => res.render("form"));
 

@@ -1,7 +1,7 @@
 const { Router } = require("express");
 
 const indexRouter = Router();
-const { messages } = require("../db");
+const { messages } = require("../dbLocal");
 const { getMessageById } = require("../controllers/infoController");
 
 indexRouter.get("/", (req, res) =>
