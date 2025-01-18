@@ -14,11 +14,11 @@
       <% messages.forEach((message, index) => { %>
       <li>
         <%= `${message.user}: ${message.text} (${message.added})` %>
-        <button onclick="window.location.href = `<%= index %>/message`">Open</button>
+        <a href="<%= index %>/message">Open</a>
       </li>
       <% }); %>
     </ul>
 
-    <button onclick="window.location.href = '/new'">New Message</button>
+    <a href="/new">New Message</a>
   </body>
 </html>

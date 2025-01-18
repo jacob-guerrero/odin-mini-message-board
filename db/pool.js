@@ -2,6 +2,6 @@ const { Pool } = require("pg");
 require("dotenv").config();
 
 const connectionString =
-  process.env.RAILWAY_DATABASE_URL || process.env.connectionString;
+  process.env.connectionString || process.env.RAILWAY_DATABASE_URL;
 
 module.exports = new Pool({ connectionString });

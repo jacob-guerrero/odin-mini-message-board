@@ -14,4 +14,3 @@ function getMessageById(req, res) {
 }
 
 module.exports = { getMessageById };
-  
