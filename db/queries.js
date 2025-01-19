@@ -9,13 +9,13 @@ async function getAllMessages() {
 
 async function insertMessage(user, text) {
   const query = `
-    INSERT INTO messages (user,text)
+    INSERT INTO messages ("user", "text")
     VALUES ($1, $2)
   `;
   const values = [user, text];
 
   const { rows } = await pool.query(query, values);
-  return rows;
+  return rows[0];
 }
 
 async function getMessageById(id) {

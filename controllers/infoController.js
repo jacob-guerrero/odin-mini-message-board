@@ -34,4 +34,12 @@ async function getAllMessages(req, res) {
   res.render("index", { title: "Mini Messageboard", messages: messages });
 }
 
-module.exports = { getMessageById, getAllMessages };
+async function addMessage(req, res) {
+  const { messageUser, messageText } = req.body;
+
+  await db.insertMessage(messageUser, messageText);
+
+  res.redirect("/");
+}
+
+module.exports = { getMessageById, getAllMessages, addMessage };

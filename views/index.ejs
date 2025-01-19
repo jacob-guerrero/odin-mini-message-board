@@ -14,7 +14,7 @@
       <% messages.forEach((message, index) => { %>
       <li>
         <%= `${message.user}: ${message.text} (${message.added})` %>
-        <a href="<%= index %>/message">Open</a>
+        <a href="<%= `${message.id}` %>/message">Open</a>
       </li>
       <% }); %>
     </ul>
