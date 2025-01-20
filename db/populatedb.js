@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS messages (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     "user" VARCHAR(100) NOT NULL,
     "text" TEXT NOT NULL,
-    added TIMESTAMP DEFAULT NOW()
+    added TIMESTAMPTZ DEFAULT NOW()
 );
 `;
 // Insert sample messages

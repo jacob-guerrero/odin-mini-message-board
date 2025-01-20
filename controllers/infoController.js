@@ -1,5 +1,7 @@
 // Host
 const db = require("../db/queries");
+// Date Formatting
+const { format } = require("date-fns");
 
 // Locally
 /*
@@ -25,13 +27,26 @@ async function getMessageById(req, res) {
     return;
   }
 
-  res.render("info", { id: req.params.id, message: message });
+  const formattedMessage = {
+    ...message,
+    added: format(new Date(message.added), "MMM dd, hh:mm a"),
+  };
+
+  res.render("info", { id: req.params.id, message: formattedMessage });
 }
 
 async function getAllMessages(req, res) {
   const messages = await db.getAllMessages();
 
-  res.render("index", { title: "Mini Messageboard", messages: messages });
+  const formattedMessages = messages.map((message) => ({
+    ...message,
+    added: format(new Date(message.added), "MMM dd, hh:mm a"),
+  }));
+
+  res.render("index", {
+    title: "Mini Messageboard",
+    messages: formattedMessages,
+  });
 }
 
 async function addMessage(req, res) {
