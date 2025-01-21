@@ -32,7 +32,7 @@ async function getMessageById(req, res) {
     added: format(new Date(message.added), "MMM dd, hh:mm a"),
   };
 
-  res.render("info", { id: req.params.id, message: formattedMessage });
+  res.render("info", { id: messageId, message: formattedMessage });
 }
 
 async function getAllMessages(req, res) {
@@ -74,7 +74,15 @@ async function getMessageToUpdate(req, res) {
     return;
   }
 
-  res.render("formUpdateMsg", { id: req.params.id, message: message });
+  res.render("formUpdateMsg", { id: messageId, message: message });
+}
+
+async function deleteMessage(req, res) {
+  const messageId = Number(req.params.id);
+
+  await db.deleteMessage(messageId);
+
+  res.redirect("/");
 }
 
 module.exports = {
@@ -83,4 +91,5 @@ module.exports = {
   addMessage,
   updateMessage,
   getMessageToUpdate,
+  deleteMessage,
 };
