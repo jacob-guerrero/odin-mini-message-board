@@ -28,16 +28,6 @@ async function getMessageById(id) {
   return rows[0];
 }
 
-async function deleteMessage(id) {
-  const query = `
-    DELETE FROM messages WHERE id = $1;
-  `;
-  const values = [id];
-
-  const { rows } = await pool.query(query, values);
-  return rows[0];
-}
-
 async function updateMessage(id, newText) {
   const query = `
     UPDATE messages 
@@ -45,6 +35,16 @@ async function updateMessage(id, newText) {
     WHERE id = $2
   `;
   const values = [newText, id];
+
+  const { rows } = await pool.query(query, values);
+  return rows[0];
+}
+
+async function deleteMessage(id) {
+  const query = `
+    DELETE FROM messages WHERE id = $1;
+  `;
+  const values = [id];
 
   const { rows } = await pool.query(query, values);
   return rows[0];

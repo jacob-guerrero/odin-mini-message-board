@@ -18,6 +18,30 @@ function getMessageById(req, res) {
   res.render("info", { id: req.params.id, message: message });
 }*/
 
+async function getAllMessages(req, res) {
+  const messages = await db.getAllMessages();
+
+  const formattedMessages = messages.map((message) => ({
+    ...message,
+    added: format(new Date(message.added), "MMM dd, hh:mm a"),
+  }));
+
+  res.render("index", {
+    title: "Mini Messageboard",
+    messages: formattedMessages,
+  });
+}
+
+// Create
+async function addMessage(req, res) {
+  const { messageUser, messageText } = req.body;
+
+  await db.insertMessage(messageUser, messageText);
+
+  res.redirect("/");
+}
+
+// Read by Id
 async function getMessageById(req, res) {
   const messageId = Number(req.params.id);
   const message = await db.getMessageById(messageId);
@@ -35,36 +59,7 @@ async function getMessageById(req, res) {
   res.render("info", { id: messageId, message: formattedMessage });
 }
 
-async function getAllMessages(req, res) {
-  const messages = await db.getAllMessages();
-
-  const formattedMessages = messages.map((message) => ({
-    ...message,
-    added: format(new Date(message.added), "MMM dd, hh:mm a"),
-  }));
-
-  res.render("index", {
-    title: "Mini Messageboard",
-    messages: formattedMessages,
-  });
-}
-
-async function addMessage(req, res) {
-  const { messageUser, messageText } = req.body;
-
-  await db.insertMessage(messageUser, messageText);
-
-  res.redirect("/");
-}
-
-async function updateMessage(req, res) {
-  const messageId = Number(req.params.id);
-  const { messageText } = req.body;
-
-  await db.updateMessage(messageId, messageText);
-
-  res.redirect("/");
-}
+// Update
 async function getMessageToUpdate(req, res) {
   const messageId = Number(req.params.id);
   const message = await db.getMessageById(messageId);
@@ -76,7 +71,16 @@ async function getMessageToUpdate(req, res) {
 
   res.render("formUpdateMsg", { id: messageId, message: message });
 }
+async function updateMessage(req, res) {
+  const messageId = Number(req.params.id);
+  const { messageText } = req.body;
 
+  await db.updateMessage(messageId, messageText);
+
+  res.redirect("/");
+}
+
+// Delete
 async function deleteMessage(req, res) {
   const messageId = Number(req.params.id);
 
