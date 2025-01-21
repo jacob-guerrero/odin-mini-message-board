@@ -57,4 +57,30 @@ async function addMessage(req, res) {
   res.redirect("/");
 }
 
-module.exports = { getMessageById, getAllMessages, addMessage };
+async function updateMessage(req, res) {
+  const messageId = Number(req.params.id);
+  const { messageText } = req.body;
+
+  await db.updateMessage(messageId, messageText);
+
+  res.redirect("/");
+}
+async function getMessageToUpdate(req, res) {
+  const messageId = Number(req.params.id);
+  const message = await db.getMessageById(messageId);
+
+  if (!message) {
+    res.status(404).send("Message not found");
+    return;
+  }
+
+  res.render("formUpdateMsg", { id: req.params.id, message: message });
+}
+
+module.exports = {
+  getMessageById,
+  getAllMessages,
+  addMessage,
+  updateMessage,
+  getMessageToUpdate,
+};

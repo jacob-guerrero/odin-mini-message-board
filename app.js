@@ -5,6 +5,7 @@ const app = express();
 /* Import Routes */
 const indexRouter = require("./routes/indexRouter");
 const newMsgRouter = require("./routes/newMsgRouter");
+const messagesRouter = require("./routes/messagesRouter");
 
 /* Styles */
 const assetsPath = path.join(__dirname, "public");
@@ -21,6 +22,7 @@ const PORT = 3000;
 
 app.use("/", indexRouter);
 app.use("/new", newMsgRouter);
+app.use("/messages", messagesRouter);
 
 app.listen(PORT, () => {
   console.log(`App listening on port ${PORT}`);

@@ -1,0 +1,21 @@
+<html>
+  <body>
+    <h2>Update message</h2>
+    
+    <p>Author: <%= message.user %></p>
+    <form action="/messages/<%= id %>/edit" method="POST">
+      <label for="messageText">Message:</label>
+      <input
+        type="text"
+        id="messageText"
+        name="messageText"
+        value="<%= message.text %>"
+        required
+      />
+      <br />
+      <button type="submit">Submit</button>
+    </form>
+
+    <a href="/">Back</a>
+  </body>
+</html>

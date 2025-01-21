@@ -4,7 +4,7 @@ const newMsgRouter = Router();
 /* const { messages } = require("../dbLocal"); */
 const { addMessage } = require("../controllers/infoController");
 
-newMsgRouter.get("/", (req, res) => res.render("form"));
+newMsgRouter.get("/", (req, res) => res.render("formNewMsg"));
 
 newMsgRouter.post(
   "/",

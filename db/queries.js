@@ -47,7 +47,7 @@ async function updateMessage(id, newText) {
   const values = [newText, id];
 
   const { rows } = await pool.query(query, values);
-  return rows;
+  return rows[0];
 }
 
 module.exports = {
