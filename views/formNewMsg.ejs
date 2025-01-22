@@ -9,11 +9,11 @@
     <h2>Add a new message</h2>
 
     <form action="/new" method="POST">
-      <label for="messageUser">Author:</label>
-      <input type="text" id="messageUser" name="messageUser" required />
+      <label for="messageUser">Author (Max. 10 characters):</label>
+      <input type="text" id="messageUser" name="messageUser" maxlength="10" required />
       <br />
-      <label for="messageText">Message:</label>
-      <input type="text" id="messageText" name="messageText" required />
+      <label for="messageText">Message (Max. 50 characters):</label>
+      <input type="text" id="messageText" name="messageText" maxlength="50" required />
       <br />
       <button type="submit" class="btn btn-delete">Submit</button>
     </form>

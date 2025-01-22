@@ -10,12 +10,13 @@
 
     <p>Author: <%= message.user %></p>
     <form action="/messages/<%= id %>/edit" method="POST">
-      <label for="messageText">Message:</label>
+      <label for="messageText">Message (Max. 50 characters):</label>
       <input
         type="text"
         id="messageText"
         name="messageText"
         value="<%= message.text %>"
+        maxlength="50"
         required
       />
       <br />

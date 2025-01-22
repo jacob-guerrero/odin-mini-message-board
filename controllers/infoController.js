@@ -36,7 +36,17 @@ async function getAllMessages(req, res) {
 async function addMessage(req, res) {
   const { messageUser, messageText } = req.body;
 
-  await db.insertMessage(messageUser, messageText);
+  // Validation
+  // Ensure user and text are not empty
+  if (!messageUser || messageUser.trim() === "") {
+    return res.status(400).send("User cannot be empty.");
+  }
+  if (!messageText || messageText.trim() === "") {
+    return res.status(400).send("Message text cannot be empty.");
+  }
+
+  // Create
+  await db.insertMessage(messageUser.trim(), messageText.trim());
 
   res.redirect("/");
 }
@@ -75,7 +85,25 @@ async function updateMessage(req, res) {
   const messageId = Number(req.params.id);
   const { messageText } = req.body;
 
-  await db.updateMessage(messageId, messageText);
+  // Validation
+  // Ensure the input is not empty
+  if (!messageText || messageText.trim() === "") {
+    return res.status(400).send("Message text cannot be empty.");
+  }
+  // Fetch the current message to compare
+  const currentMessage = await db.getMessageById(messageId);
+  if (!currentMessage) {
+    return res.status(404).send("Message not found.");
+  }
+  // Check if the new message is the same as the current one
+  if (currentMessage.text === messageText.trim()) {
+    return res
+      .status(200)
+      .send("No changes made. The message is identical to the current one.");
+  }
+
+  // Update
+  await db.updateMessage(messageId, messageText.trim());
 
   res.redirect("/");
 }
